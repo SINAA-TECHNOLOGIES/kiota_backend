@@ -13,9 +13,9 @@ countries = Country.create([{ name: 'Country 1' }, { name: 'Country 2' }, { name
 
 # Create Users
 users = User.create([
-  { name: 'User 1', email: 'user1@example.com', password: 'password', country_id: countries.first.id },
-  { name: 'User 2', email: 'user2@example.com', password: 'password', country_id: countries.second.id },
-  { name: 'User 3', email: 'user3@example.com', password: 'password', country_id: countries.third.id }
+  { name: 'kiota', email: 'kiota@gmail.com', password: 'password', role: 'super_user', country_id: countries.first.id },
+  { name: 'kiota manager', email: 'kiota1@gmail.com', password: 'password', role: 'manager', country_id: countries.second.id },
+  { name: 'User 3', email: 'user3@example.com', password: 'password', role: 'manager', country_id: countries.third.id }
 ])
 
 # Create Properties

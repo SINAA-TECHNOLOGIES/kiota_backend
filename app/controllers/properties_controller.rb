@@ -17,6 +17,8 @@ class PropertiesController < ApplicationController
   end
 
   def update
+    @property = Property.find(params[:id])
+    authorize! :update, render json: @property
   end
 
   def destroy
