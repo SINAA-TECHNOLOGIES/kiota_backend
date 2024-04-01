@@ -7,3 +7,5 @@ bundle install
 bundle exec rails db:migrate
 # bundle exec rails db:seed
 
+chmod +x bin/rails
+./bin/rails server
