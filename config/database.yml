@@ -79,6 +79,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
   database: kiota_api_production
   username: kiota_api
   password: <%= ENV["KIOTA_API_DATABASE_PASSWORD"] %>
