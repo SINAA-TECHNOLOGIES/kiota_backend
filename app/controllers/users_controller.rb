@@ -50,6 +50,9 @@ class UsersController < ApplicationController
   def create
     puts "Received params: #{params.inspect}"
     authorize! :create, User
+    if params[:password].present?
+      params[:user][:password] = params[:password]
+    end
     @user = User.new(user_params) 
     # Further restrictions on who can create which roles
     puts "can create user as manager: #{can? :create, User.new(country_id: user_params[:country_id])}"
