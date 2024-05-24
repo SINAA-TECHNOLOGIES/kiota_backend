@@ -3,8 +3,5 @@
 set -o errexit
 
 bundle install
-
-bundle exec rails db:migrate
-# bundle exec rails db:seed
-
-chmod +x bin/rails
+bundle exec rake db:migrate
+bundle exec rake db:seed
