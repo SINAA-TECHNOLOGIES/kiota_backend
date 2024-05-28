@@ -33,10 +33,12 @@ class ApplicationController < ActionController::API
 
   def authenticate!
     header = request.headers['Authorization']
+    Rails.logger.info "Authorization Header: #{header.inspect}"
     if header.present?
       token = header.split(' ').last
       begin
         @decoded = JsonWebToken.decode(token)
+        Rails.logger.info "Decoded Token: #{@decoded.inspect}"
         if @decoded.nil?
           render json: { errors: 'Invalid token' }, status: :unauthorized
           return
