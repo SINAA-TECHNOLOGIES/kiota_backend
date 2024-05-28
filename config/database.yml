@@ -81,5 +81,5 @@ production:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
   database: kiota_api_production
-  username: kiota_api
+  username: kiota
   password: <%= ENV["KIOTA_API_DATABASE_PASSWORD"] %>
