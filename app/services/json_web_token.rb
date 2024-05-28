@@ -17,15 +17,19 @@ class JsonWebToken
   class << self
     def encode(payload, exp = 24.hours.from_now)
       payload[:exp] = exp.to_i
-      token = JWT.encode(payload, Rails.application.secrets.secret_key_base)
+      secret_key = Rails.application.secrets.secret_key_base
+      Rails.logger.info "Encoding with SECRET_KEY_BASE: #{secret_key}"
+      token = JWT.encode(payload, secret_key)
       Rails.logger.info "Generated Token: #{token}"
       token
     end
 
     def decode(token)
       Rails.logger.info "Decoding Token: #{token}"
+      secret_key = Rails.application.secrets.secret_key_base
+      Rails.logger.info "Using SECRET_KEY_BASE: #{secret_key}"
       begin
-        decoded = JWT.decode(token, Rails.application.secrets.secret_key_base)[0]
+        decoded = JWT.decode(token, secret_key)[0]
         Rails.logger.info "Decoded JWT Body: #{decoded.inspect}"
         HashWithIndifferentAccess.new(decoded)
       rescue JWT::ExpiredSignature
@@ -41,3 +45,4 @@ class JsonWebToken
     end
   end
 end
+
