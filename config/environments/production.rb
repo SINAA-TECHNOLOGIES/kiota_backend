@@ -84,7 +84,26 @@ Rails.application.configure do
   # before
   # config.hosts << ENV['DEVELOPMENT_HOSTS']
   # after
-  config.hosts << "kiota-api.onrender.com"
+  # config.hosts << "kiota-api.onrender.com"
+  # Allow requests from any origin in development, restrict in production
+  config.hosts << ENV['ALLOWED_HOSTS'] if ENV['ALLOWED_HOSTS']
+
+  # Enable CORS for API
+  config.middleware.insert_before 0, Rack::Cors do
+    allow do
+      origins ENV['ALLOWED_ORIGINS'] || '*'
+      resource '*',
+        headers: :any,
+        methods: [:get, :post, :put, :patch, :delete, :options, :head],
+        credentials: true
+    end
+  end
+
+  # Disable cookies and session since it's an API
+  config.api_only = true
+
+  # Use JSON as default format for API responses
+  config.default_format = :json
 
   # config.hosts = [
   #   "example.com",     # Allow requests from example.com
